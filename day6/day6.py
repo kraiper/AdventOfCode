@@ -57,17 +57,24 @@ while i < len(fish_list_str):
     i += 1
 
 thread_list = []
-result = 0
+
+fish_dict = {}
+i = 0
+while i < 300:
+    fish_dict[i] = 0
+    i += 1
+
+
 for fish in fish_list_int:
-    t = Thread(target=calc_fish_mem_save, args=(256, [fish]))
-    t.start()
-    thread_list.append(t)
+    fish_dict[fish] += 1
 
-for thread in thread_list:
-    thread.join()
-    # result += thread.join()
+i = 0
+fish_sum = len(fish_list_int)
+while i < 256:
+    fish_dict[i + 7] += fish_dict[i]
+    fish_dict[i + 9] += fish_dict[i]
+    fish_sum += fish_dict[i]
+    i += 1
 
-while not my_queue.empty():
-    result += my_queue.get()
-
-print(result)
+# print(fish_dict)
+print(fish_sum)
