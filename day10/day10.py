@@ -100,7 +100,6 @@ def p1():
         value = check_row(row)
         if value:
             error_symbols.append(value)
-    print(len(error_symbols))
     print(calc_points(error_symbols))
 
 
