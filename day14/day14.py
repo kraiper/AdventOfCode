@@ -20,7 +20,9 @@ def read_lines(file_name):
     return file_content
 
 def p1():
-    lines = read_lines("day10/input.txt")
+    lines = read_lines("day14/input.txt")
+    template = lines.pop(0)
+    print(template)
 
 
 p1()
