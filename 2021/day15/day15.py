@@ -102,7 +102,7 @@ class GameBoard:
             y = position["y"]
             self.visited[x][y] = True
             # print(position)
-            print(risk, x, y)
+            # print(risk, x, y)
             if x == endx and y == endy:
                 return risk
             if x != 0 and not self.visited[x - 1][y]:
@@ -134,7 +134,7 @@ def p2():
     lines = read_lines("day15/input.txt")
     board = GameBoard(lines, 5)
     board.extend()
-    board.print()
+    # board.print()
     result = board.traverse_board()
     print(result)
 
