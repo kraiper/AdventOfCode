@@ -15,5 +15,5 @@ print(f"Solution_a: {solution_a(puzzle.input_data)}")
 
 answer_b = None
 assert answer_b is not None
-assert str(solution_b(example.input_data)) == answer_b
+assert str(solution_b(example.input_data)) == str(answer_b)
 print(f"Solution_b: {solution_b(puzzle.input_data)}")
