@@ -8,7 +8,7 @@
             "name": "Python: Module",
             "type": "python",
             "request": "launch",
-            "module": "2022.day7.main",
+            "module": "2023.day1.main",
             "justMyCode": true,
             "env": {
                 "AOC_SESSION": "53616c7465645f5f9f002854e18c7386a6990da3be440f7343bf01cef7e0e77bc91d72a688165c724157654f07dfecb169e3a3c998e31040a6fca90f9b1ec1c4"
