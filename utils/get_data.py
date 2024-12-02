@@ -3,7 +3,7 @@ from aocd import get_data
 from pathlib import Path
 from aocd import submit
 
-AOC_SESSION="53616c7465645f5f9f002854e18c7386a6990da3be440f7343bf01cef7e0e77bc91d72a688165c724157654f07dfecb169e3a3c998e31040a6fca90f9b1ec1c4"
+AOC_SESSION="53616c7465645f5f355c90aa89fae92f79588f6bc7b9ee4b79aa3d9d27dfcc3ba12e1ae2f2ea947421d5fc8c85ef91e404fae5c5296c2b9bbc11af57f9fe10af"
 
 def get_data_to_file(year: int, day: int):
     data = get_data(session=AOC_SESSION, year=year, day=day).splitlines()

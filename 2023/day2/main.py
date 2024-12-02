@@ -25,7 +25,7 @@ def solution_a(data: str):
                         max_cubes[grab[1]] = int(grab[0])
             if max_grap_size < grab_size:
                 max_grap_size = grab_size
-            
+
 
         if max_cubes["red"] < 13 and max_cubes["green"] < 14 and max_cubes["blue"] < 15 and max_grap_size < 40:
             possible_game.append(game_index)
