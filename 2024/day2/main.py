@@ -45,25 +45,25 @@ def solution_b(data: str):
                 add = False
         return add
 
-    def pop(l):
+    def pop(l: list):
+        print(l)
         i = 0
-        add = True
         up = l[i] < l[i+1]
         while i < len(l) -1:
             i += 1
             if abs(l[i-1] - l[i]) in [1, 2 , 3]:
                 if up:
                     if l[i-1] >= l[i]:
-                        l.pop(i)
-                        return l
+                        del l[i]
+                        return
                 elif not up:
                     if l[i-1] <= l[i]:
-                        l.pop(i)
-                        return l
+                        del l[i]
+                        return
             else:
-                l.pop(i)
-                return l
+                del l[i]
 
+                return
 
     safe = 0
     for line in data.splitlines():
@@ -71,8 +71,11 @@ def solution_b(data: str):
         if check_line(int_list):
             safe += 1
         else:
-            l2 = pop(int_list)
-            if check_line(l2):
+            s1 = len(int_list)
+            pop(int_list)
+            s2 = len(int_list)
+            assert s1 != s2
+            if check_line(int_list):
                 safe += 1
     print(safe)
     return safe
