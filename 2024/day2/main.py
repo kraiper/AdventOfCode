@@ -46,7 +46,6 @@ def solution_b(data: str):
         return add
 
     def pop(l: list):
-        print(l)
         i = 0
         up = l[i] < l[i+1]
         while i < len(l) -1:
@@ -54,15 +53,14 @@ def solution_b(data: str):
             if abs(l[i-1] - l[i]) in [1, 2 , 3]:
                 if up:
                     if l[i-1] >= l[i]:
-                        del l[i]
+                        del l[i-1]
                         return
                 elif not up:
                     if l[i-1] <= l[i]:
                         del l[i]
                         return
             else:
-                del l[i]
-
+                del l[i-1]
                 return
 
     safe = 0
@@ -77,7 +75,6 @@ def solution_b(data: str):
             assert s1 != s2
             if check_line(int_list):
                 safe += 1
-    print(safe)
     return safe
 
 puzzle = Puzzle(year=2024, day=2)
