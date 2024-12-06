@@ -1,7 +1,7 @@
 import copy
 from aocd.models import Puzzle
 from aocd.examples import Example
-
+import time
 directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
 
 def create_board(data: str):
@@ -78,29 +78,25 @@ def traverse_board_complex(board: list, start: list):
 
 def solution_a(data: str):
     board, start = create_board(data)
-    traversed = traverse_board(board, start)
-    result = calculate_result(traversed)
+    traveled = traverse_board(board, start)
+    result = calculate_result(traveled)
     return result
 
 def solution_b(data: str):
     board, start = create_board(data)
     result = 0
-
-    x = 0
-    y = 0
+    traversed_points_from_one = traverse_board(board, start.copy())
+    traversed_points_from_one = [t for t in (set(tuple(i) for i in traversed_points_from_one))]
     boards = 0
-    total_boards = len(board) * len(board[0])
-    while x < len(board):
-        y = 0
-        while y < len(board[0]):
-            boards += 1
-            print(f"Board {boards} of roughly {total_boards}")
-            if(board[x][y] == "."):
-                temp_board = copy.deepcopy(board)
-                temp_board[x][y] = "#"
-                result += traverse_board_complex(temp_board, start)
-            y += 1
-        x += 1
+    total_boards = len(traversed_points_from_one)
+    for point in traversed_points_from_one:
+        boards += 1
+        print(f"Board {boards} of roughly {total_boards}")
+
+        temp_board = copy.deepcopy(board)
+        temp_board[point[0]][point[1]] = "#"
+        result += traverse_board_complex(temp_board, start.copy())
+
     return result
 
 puzzle = Puzzle(year=2024, day=6)
@@ -112,4 +108,7 @@ print(f"Solution_a: {solution_a(puzzle.input_data)}")
 answer_b = 6
 assert answer_b is not None
 assert str(solution_b(example.input_data)) == str(answer_b)
+tic = time.perf_counter()
 print(f"Solution_b: {solution_b(puzzle.input_data)}")
+toc = time.perf_counter()
+print(f"Downloaded the tutorial in {toc - tic:0.4f} seconds")
