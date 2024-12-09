@@ -69,7 +69,7 @@ def solution_a(data: str):
     return result
 
 def solution_b(data: str):
-    xmas_array = [[] f2029or _ in range(len(data.splitlines()))] # row, column
+    xmas_array = [[] for _ in range(len(data.splitlines()))] # row, column
     row = 0
     for line in data.splitlines():
         for x in line:
