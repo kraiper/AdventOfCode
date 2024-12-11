@@ -22,7 +22,6 @@ def solution_a(data: str):
     full_list = [(val, 0) for val in data.splitlines()[0].split(" ")]
     result = 0
     max_depth = 25
-    print(full_list)
     while len(full_list) != 0:
         current = full_list.pop()
         result += calculate_itteration(current, max_depth)
@@ -32,7 +31,6 @@ def solution_b(data: str):
     full_list = [(val, 0) for val in data.splitlines()[0].split(" ")]
     result = 0
     max_depth = 75
-    print(full_list)
     while len(full_list) != 0:
         current = full_list.pop()
         result += calculate_itteration(current, max_depth)
