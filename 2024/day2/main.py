@@ -45,24 +45,6 @@ def solution_b(data: str):
                 add = False
         return add
 
-    def pop(l: list):
-        i = 0
-        up = l[i] < l[i+1]
-        while i < len(l) -1:
-            i += 1
-            if abs(l[i-1] - l[i]) in [1, 2 , 3]:
-                if up:
-                    if l[i-1] >= l[i]:
-                        del l[i-1]
-                        return
-                elif not up:
-                    if l[i-1] <= l[i]:
-                        del l[i]
-                        return
-            else:
-                del l[i-1]
-                return
-
     safe = 0
     for line in data.splitlines():
         int_list = list(map(int,line.split(" ")))
@@ -70,11 +52,14 @@ def solution_b(data: str):
             safe += 1
         else:
             s1 = len(int_list)
-            pop(int_list)
-            s2 = len(int_list)
-            assert s1 != s2
-            if check_line(int_list):
-                safe += 1
+            for i in range(s1):
+                test_list = int_list.copy()
+                test_list.pop(i)
+                s2 = len(test_list)
+                assert s1 != s2
+                if check_line(test_list):
+                    safe += 1
+                    break
     return safe
 
 puzzle = Puzzle(year=2024, day=2)
