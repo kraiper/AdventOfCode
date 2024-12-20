@@ -141,7 +141,6 @@ def traverse_a(board, start, end, visited):
 def solution_a(data: str):
     board, visited, start, end = create_board(data)
     results = traverse_a(board, start, end, visited)
-    print(results)
     result, _ = results[0]
     result_list = []
     for res in results:
@@ -164,7 +163,7 @@ example: Example = puzzle.examples[0]
 
 assert str(solution_a(example.input_data)) == "7036"
 answer_a = solution_a(puzzle.input_data)
-# print(f"Solution_a: {answer_a}")
+print(f"Solution_a: {answer_a}")
 
 # answer_b = None
 # assert answer_b is not None
