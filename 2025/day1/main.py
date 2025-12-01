@@ -6,8 +6,9 @@ from aocd.examples import Example
 def solution_a(data: str):
     data_list = data.split("\n")
     pos = 50
+    res = 0
+
     for line in data_list:
-        print(line)
         dir = operator
         if line[0] == "L":
             dir = operator.sub
@@ -15,18 +16,26 @@ def solution_a(data: str):
         elif line[0] == "R":
             dir = operator.add
             num = int(line.split("R")[1])
-
-        while num != 0:
+        i = 0
+        while num != 0 and i < 10:
             pos = dir(pos, num)
             if pos < 0:
                 num = abs(pos) - 1
                 pos = 99
             elif pos > 99:
-                num = num - 99
+                num = pos - 100
                 pos = 0
             else:
                 num = 0
-        print(pos)
+            i+=1
+        if i > 9:
+            break
+        if pos == 0:
+            res += 1
+    return res
+
+
+
 
 
 def solution_b(data: str):
