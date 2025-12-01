@@ -7,7 +7,7 @@ def solution_a(data: str):
 def solution_b(data: str):
     pass
 
-puzzle = Puzzle(year=2024, day=)
+puzzle = Puzzle(year=2025, day=1)
 example: Example = puzzle.examples[0]
 
 assert str(solution_a(example.input_data)) == example.answer_a
