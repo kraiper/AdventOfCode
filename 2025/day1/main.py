@@ -1,3 +1,4 @@
+import math
 import operator
 from aocd.models import Puzzle
 from aocd.examples import Example
@@ -44,25 +45,22 @@ def solution_b(data: str):
         elif line[0] == "R":
             dir = operator.add
             num = int(line.split("R")[1])
-        while num != 0:
-            start_pos = pos
-            pos = dir(pos, num)
-            if pos < 0:
-                num = abs(pos) - 1
-                pos = 99
-                if start_pos != 0:
-                    res += 1
-            elif pos > 99:
-                num = pos - 100
-                pos = 0
-                if start_pos != 0:
-                    res += 1
-            else:
-                num = 0
-        print(pos)
 
+        res += math.floor(num / 100)
+        rest = num % 100
+
+        pos = dir(pos, rest)
+
+        if pos < 0:
+            pos = 100 - abs(pos)
+            res += 1
+        elif pos > 99:
+            pos = 0 + pos - 100
+            res += 1
+        
         if pos == 0:
             res += 1
+
     print(res)
     return res
 
