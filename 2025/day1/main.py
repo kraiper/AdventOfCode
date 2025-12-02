@@ -49,17 +49,19 @@ def solution_b(data: str):
         res += math.floor(num / 100)
         rest = num % 100
 
-        pos = dir(pos, rest)
+        while rest != 0:
+            pos = dir(pos, 1)
 
-        if pos < 0:
-            pos = 100 - abs(pos)
-            res += 1
-        elif pos > 99:
-            pos = 0 + pos - 100
-            res += 1
-        
-        if pos == 0:
-            res += 1
+            if pos < 0:
+                pos = 99
+            elif pos > 99:
+                pos = 0
+
+            if pos == 0:
+                res += 1
+
+            rest -= 1
+        print(pos, res)
 
     print(res)
     return res
