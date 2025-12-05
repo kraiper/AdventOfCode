@@ -47,7 +47,7 @@ example: Example = puzzle.examples[0]
 
 assert str(solution_a(example.input_data)) == example.answer_a
 start = time.time()
-sol_answer_a = str(solution_b(puzzle.input_data))
+sol_answer_a = str(solution_a(puzzle.input_data))
 end = time.time()
 print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
 

@@ -23,108 +23,43 @@ def solution_a(data: str):
         res += line_max
     return res
 
-# def number_search_2(line: str, highest: int, indexes: list, moving_index: int):
-#     current_number = ""
-#     print(indexes)
-#     for num in indexes:
-#         current_number += line[num]
-#     current_number = int(current_number)
-
-#     if highest < current_number:
-#         highest = current_number
-
-#     if indexes[-1] < len(line) - 1:
-#         indexes[-1] += 1
-#         return number_search_2(line, highest, indexes, moving_index)
-#     elif moving_index == 0 and indexes[moving_index] + 11 == len(line) - 1:
-#         print("returning")
-#         return highest
-#     else: # indexes[moving_index] == len(line) - 1:
-#         if (11 - moving_index) + indexes[moving_index] < len(line) - 1:
-#             next_moving_index = moving_index
-#         else:
-#             next_moving_index = moving_index - 1
-
-#         moves = 0
-#         step_value = indexes[next_moving_index] + 1
-#         while next_moving_index + moves < 12:
-#             indexes[next_moving_index + moves] = step_value + moves
-#             moves += 1
-#         return number_search_2(line, highest, indexes, next_moving_index)
 
 
+def find_highest(line, start, end):
+    highest = 0
+    highest_index = 0
+    for index in range(start, end):
+        value = int(line[index])
+        if value > highest:
+            highest = value
+            highest_index = index
 
-def number_search_2(line: str, highest: int, indexes: list, moving_index: int):
-    ### Check current value
-    current_number = ""
-    for num in indexes:
-        current_number += line[num]
-    current_number = int(current_number)
-
-    if highest < current_number:
-        highest = current_number
-
-    ### index logic
-
-    ### last index loop
-    if moving_index == len(indexes) - 1:
-        if indexes[moving_index] == len(line) - 1:
-            return highest
-        indexes[-1] += 1
-        number_search_2(line, highest, indexes, moving_index)
-
-    while indexes[moving_index] < len(line) - (len(indexes) - moving_index):
-        moves = 0
-        step_value = indexes[moving_index] + 1
-        while moving_index + moves < 12:
-            indexes[moving_index + moves] = step_value + moves
-            moves += 1
-        number_search_2(line, highest, indexes, moving_index + 1)
+    return highest, highest_index
     
-
-    # if indexes[-1] < len(line) - 1:
-    #     indexes[-1] += 1
-    #     return number_search_2(line, highest, indexes, moving_index)
-    # elif moving_index == 0 and indexes[moving_index] + 11 == len(line) - 1:
-    #     print("returning")
-    #     return highest
-    # else: # indexes[moving_index] == len(line) - 1:
-    #     if (11 - moving_index) + indexes[moving_index] < len(line) - 1:
-    #         next_moving_index = moving_index
-    #     else:
-    #         next_moving_index = moving_index - 1
-
-    #     moves = 0
-    #     step_value = indexes[next_moving_index] + 1
-    #     while next_moving_index + moves < 12:
-    #         indexes[next_moving_index + moves] = step_value + moves
-    #         moves += 1
-    #     return number_search_2(line, highest, indexes, next_moving_index)
 
 
 def solution_b(data: str):
     lines = data.split("\n")
     res = 0
     for line in lines:
-        line_max = 0
-        step = 0
-        indexes = [x + step for x in range(12)]
-        loop_max = 0
-        for x in range(12):
-            loop_max = number_search_2(line, line_max, indexes, x)
-            print(loop_max)
-        res += line_max
+        line_res = ""
+        next_start = 0
+        for index in range(12):
+            highest, highest_index = find_highest(line, next_start, len(line) - 11 + index)
+            line_res += str(highest)
+            next_start = highest_index + 1
+        res += int(line_res)
     return res
 
 puzzle = Puzzle(year=2025, day=3)
 example: Example = puzzle.examples[0]
 
 
-# assert str(solution_a(example.input_data)) == example.answer_a
-# start = time.time()
-# sol_answer_a = str(solution_a(puzzle.input_data))
-# end = time.time()
-# print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
+assert str(solution_a(example.input_data)) == example.answer_a
+start = time.time()
+sol_answer_a = str(solution_a(puzzle.input_data))
+end = time.time()
+print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
 
 answer_b = 3121910778619
 assert answer_b is not None

@@ -61,9 +61,6 @@ def solution_b(data: str):
                 res += 1
 
             rest -= 1
-        print(pos, res)
-
-    print(res)
     return res
 
 
