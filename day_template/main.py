@@ -21,7 +21,7 @@ print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
 answer_b = None
 assert answer_b is not None
 sol_b = str(solution_b(example.input_data))
-assert sol_b == str(answer_b), f"Got {sol_b}, expected {example.answer_a}"
+assert sol_b == str(answer_b), f"Got {sol_b}, expected {answer_b}"
 start = time.time()
 sol_answer_b = str(solution_b(puzzle.input_data))
 end = time.time()
