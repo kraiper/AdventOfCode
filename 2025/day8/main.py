@@ -42,31 +42,41 @@ def solution_a(data: str, loops: int):
 
     loop = 0
     light_groups: list[set] = []
-    while loop < loops:
+    while loop < loops - 1:
         shortest_dist, c1, c2 = pop_shortest(dist_list)
         exists = False
         added = False
         for lights in light_groups:
             if c1 in lights and c2 in lights:
                 exists = True
-                loop -= 1
                 break
             elif c1 in lights or c2 in lights:
                 added = True
                 lights.add(c1)
                 lights.add(c2)
+                loop += 1
                 break
         if not exists and not added:
             light_groups.append(set())
             light_groups[-1].add(c1)
             light_groups[-1].add(c2)
-        loop += 1
+            loop += 1
+
+        si1 = 0
+    while si1 < len(light_groups):
+        si2 = si1 + 1
+        while si2 < len(light_groups):
+            if light_groups[si1] & light_groups[si2]:
+                light_groups[si1].update(light_groups[si2])
+                light_groups.pop(si2)
+            else:
+                si2 += 1
+        si1 += 1
+
+    print(light_groups)
 
     size = [len(s) for s in light_groups]
     size.sort(reverse=True)
-    print(size)
-    print(size[0], size[1], size[2])
-    print(size[0] * size[1] * size[2])
     return size[0] * size[1] * size[2]
 
 def solution_b(data: str):
@@ -81,6 +91,7 @@ start = time.time()
 sol_answer_a = str(solution_a(puzzle.input_data, 1000))
 end = time.time()
 assert int(sol_answer_a) > 4050
+assert int(sol_answer_a) < 194300
 print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
 
 answer_b = None
