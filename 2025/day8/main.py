@@ -16,12 +16,12 @@ def pop_shortest(dist_list: list):
     shortest_index = 0
 
     for index, value in enumerate(dist_list):
-        dist, _, _ = value
+        dist, _, _ = value[0]
         if dist != 0 and dist < shortest:
             shortest = dist
             shortest_index = index
 
-    return dist_list.pop(shortest_index)
+    return dist_list[shortest_index].pop(0)
 
 def solution_a(data: str, loops: int):
     coord_list = []
@@ -32,15 +32,13 @@ def solution_a(data: str, loops: int):
     dist_list = []
 
     for index_c1, c1 in enumerate(coord_list):
-        shortest = 9999999999999999999
+        index_dists = []
         for index_c2, c2 in enumerate(coord_list):
             dist = calc_euclidean_distance(c1, c2)
-            if dist < shortest and index_c1 != index_c2:
-                shortest = dist
-                shortest_index = index_c2
-        dist_list.append((shortest, index_c1, shortest_index))
-
-    print(dist_list)
+            if index_c1 != index_c2:
+                index_dists.append((float(dist), index_c1, index_c2))
+        index_dists.sort()
+        dist_list.append(index_dists)
 
     loop = 0
     light_groups: list[set] = []
@@ -64,10 +62,12 @@ def solution_a(data: str, loops: int):
             light_groups[-1].add(c2)
         loop += 1
 
-    print(light_groups)
-
-
-    pass
+    size = [len(s) for s in light_groups]
+    size.sort(reverse=True)
+    print(size)
+    print(size[0], size[1], size[2])
+    print(size[0] * size[1] * size[2])
+    return size[0] * size[1] * size[2]
 
 def solution_b(data: str):
     pass
@@ -80,6 +80,7 @@ assert sol_a == example.answer_a, f"Got {sol_a}, expected {example.answer_a}"
 start = time.time()
 sol_answer_a = str(solution_a(puzzle.input_data, 1000))
 end = time.time()
+assert int(sol_answer_a) > 4050
 print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
 
 answer_b = None
