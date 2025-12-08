@@ -43,6 +43,7 @@ def solution_a(data: str, loops: int):
     loop = 0
     light_groups: list[set] = []
     while loop < loops - 1:
+        next = False
         shortest_dist, c1, c2 = pop_shortest(dist_list)
         exists = False
         added = False
@@ -54,24 +55,27 @@ def solution_a(data: str, loops: int):
                 added = True
                 lights.add(c1)
                 lights.add(c2)
-                loop += 1
-                break
+                next = True
         if not exists and not added:
             light_groups.append(set())
             light_groups[-1].add(c1)
             light_groups[-1].add(c2)
+            next = True
+
+        if next:
             loop += 1
 
         si1 = 0
-    while si1 < len(light_groups):
-        si2 = si1 + 1
-        while si2 < len(light_groups):
-            if light_groups[si1] & light_groups[si2]:
-                light_groups[si1].update(light_groups[si2])
-                light_groups.pop(si2)
-            else:
-                si2 += 1
-        si1 += 1
+
+        while si1 < len(light_groups):
+            si2 = si1 + 1
+            while si2 < len(light_groups):
+                if light_groups[si1] & light_groups[si2]:
+                    light_groups[si1].update(light_groups[si2])
+                    light_groups.pop(si2)
+                else:
+                    si2 += 1
+            si1 += 1
 
     print(light_groups)
 
