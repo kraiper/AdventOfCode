@@ -1,28 +1,43 @@
-from aocd.models import Puzzle
-from aocd.examples import Example
+from pathlib import Path
 import time
 
-def solution_a(data: str):
-    pass
+answer_a = None
+answer_b = None
 
-def solution_b(data: str):
-    pass
 
-puzzle = Puzzle(year=2025, day=3)
-example: Example = puzzle.examples[0]
+def read_file(file_str: str):
+    data_lines: list[str] = []
+    with open(file_str, "r") as f:
+        data_lines = f.readlines()
 
-sol_a = str(solution_a(example.input_data))
-assert sol_a == example.answer_a, f"Got {sol_a}, expected {example.answer_a}"
+    return data_lines
+
+def solution_a(file_str: str):
+    data_lines = read_file(file_str)
+
+
+def solution_b(file_str: str):
+    data_lines = read_file(file_str)
+
+
+
+
+example_file = Path(__file__).parent / "example.txt"
+data_file = Path(__file__).parent / "data.txt"
+
+assert answer_a is not None
+sol_a = str(solution_a(example_file))
+assert sol_a == answer_a, f"Got {sol_a}, expected {answer_a}"
 start = time.time()
-sol_answer_a = str(solution_a(puzzle.input_data))
+sol_answer_a = str(solution_a(data_file))
 end = time.time()
 print(f"Solution_a: {sol_answer_a} - time taken: {end - start}")
 
-answer_b = None
+
 assert answer_b is not None
-sol_b = str(solution_b(example.input_data))
+sol_b = str(solution_b(example_file))
 assert sol_b == str(answer_b), f"Got {sol_b}, expected {answer_b}"
 start = time.time()
-sol_answer_b = str(solution_b(puzzle.input_data))
+sol_answer_b = str(solution_b(data_file))
 end = time.time()
 print(f"Solution_b: {sol_answer_b} - time taken: {end - start}")
